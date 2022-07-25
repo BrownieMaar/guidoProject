@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="./guidohu_.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="./styles.css">
     <title>Document</title>
+    <script src="./musicconvert.js" defer></script>
 </head>
 <body>
     <h1>Ez egy projekt.</h1>
@@ -13,11 +15,14 @@
     
 
     <h3>3. iteráció</h3>
-    <p>Itt kisérletezek.</p>
-    <input id="musIn" value="(M-)Tu(1e)a(3) est(:3) pot(2e)én(4)ti(1w)a.(2-.)" style="width: 100%;" oninput="workspace()">
+    <p>Sikerült a bemeneti kódot darabjaira szedni s egy objektumba elhelyyezni az adatokat. Ezután az objektumot
+        feldolgozni, kiírni
+        a kottát whitespace-el megfűszerezve, a szöveget pedig kiszámolt szélességű <code>span</code> elemekkel
+        pontosan a hangcsoportok alá rendezni.
+    </p>
+    <input id="musIn" value="(M-)Tu(1e)a(3) est(:3) pot(2e)én(4)ti(1w)a.(2-.)" style="width: 100%;"
+        oninput="callThis()">
     <p id="musOut" class="music"></p>
     <pre id="musicTextOut" class="musictext"></pre>
-
-    <script src="./musicconvert.js"></script>
 </body>
 </html>

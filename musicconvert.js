@@ -18,13 +18,11 @@ function writeOutInPreDiv(outStr, id) {
 }
 
 function getGuidoCharWidth(charStr, fontSize) {
-  let virtualElement = document.getElementById("testCanv");
+  let virtualElement = document.createElement("canvas");
   let contextOfVirtualElement = virtualElement.getContext("2d");
   contextOfVirtualElement.font = `${fontSize} ${"GuidoHU"}`;
-  contextOfVirtualElement.clearRect(0, 0, 500, 400)
-  contextOfVirtualElement.fillText(charStr, 0, 50);
   let widthOfChar = contextOfVirtualElement.measureText(charStr).width;
-  //virtualElement.remove();
+  virtualElement.remove();
   return widthOfChar;
 
 }
@@ -174,7 +172,6 @@ function callThis() {
   workspace();
 
 }
-window.onload = (event) => {
-  console.log('page is fully loaded');
-  callThis();
-};
+
+
+callThis();
