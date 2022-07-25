@@ -5,6 +5,30 @@
     src: url(./guidohu_.ttf) format("truetype");
 }
 
+@font-face {
+    font-family: "Book Antiqua";
+    src: url(./BKANT.TTF);
+}
+
+@font-face {
+    font-family: "Book Antiqua";
+    src: url(./ANTQUAB.TTF);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Book Antiqua";
+    src: url(./ANTQUAI.TTF);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Book Antiqua";
+    src: url(./ANTQUABI.TTF);
+    font-weight: bold;
+    font-style: italic;
+}
+
 body {
     width: 1200px;
     margin: auto;
