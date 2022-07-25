@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,400;1,200;1,500&display=swap');
+
+@font-face {
+    font-family: 'GuidoHU';
+    src: url(./guidohu_.ttf) format("truetype");
+}
+
+body {
+    width: 1200px;
+    margin: auto;
+    background-color: lightcoral;
+    color: black;
+}
+
+h1 {
+    font-family: 'Work Sans';
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-family: 'Work Sans';
+    font-weight: 200;
+    
+    text-align: justify;
+}
+
+h3 {
+    font-family: 'Work Sans';
+    font-weight: 900;
+    margin-top: 2rem;
+    margin-bottom: 0px;
+}
+
+p {
+    font-family: 'Work Sans';
+    font-weight: 400;
+    font-size: 15px;
+    font-style: italic;
+    text-align: justify;
+}
+
+mark {
+    font-size: 15px;
+    font-style: normal;
+    background-color: inherit;
+    font-family: Consolas;
+}
+
+.music {
+    width: fit-content;
+    font-style: normal;
+    font-size: 60px;
+    font-family: 'GuidoHU';
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.musictext {
+    width: fit-content;
+    font-size: 30px;
+    font-family: 'Book Antiqua';
+    margin-top: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.musictext span {
+    display: inline-block;
+    text-align: center;
+}
+
+em {
+    font-weight: bold;
+    font-style: normal;
+    color: red;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+@media screen and (max-width: 1000px) {
+    body {
+        width: 80%
+    }
+}

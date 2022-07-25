@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ez egy projekt.</h1>
+    <h2>A projekt célja, hogy guido betűtípussal készült kottákat lehessen webes alapú környezetben használni.</h2> 
+    <h3>2. iteráció</h3>
+
+    <p>Ide ha beírsz egy nyers kottakódot, kiírom neked kottában.</p>
+    <input id="musIn" value="(M-)        Tu(1e) -  a(---3)    est(-:--3)   pot(---2e) - én(---4) -  ti(---1w)  -  a.(---2-.)" style="width: 100%;" oninput="sliceUpInput()">
+    <p id="musOut" class="music"></p>
+    <pre id="place" class="musictext"></pre>
+
+    <script src="./splitNOut.js"></script>
+
+</body>
+</html>
