@@ -21,7 +21,7 @@ function getGuidoCharWidth(charStr, fontSize) {
   let virtualElement = document.getElementById("testCanv");
   let contextOfVirtualElement = virtualElement.getContext("2d");
   let guidoFont = new FontFace("Guido HU", "url(./guidohu_.ttf)");
-  contextOfVirtualElement.font = fontSize + " Guido HU";
+  contextOfVirtualElement.font = fontSize + " " + guidoFont.family;
   contextOfVirtualElement.clearRect(0,0,500,400)
   contextOfVirtualElement.fillText(charStr, 0, 50);
   let widthOfChar = contextOfVirtualElement.measureText(charStr).width;
