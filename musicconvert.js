@@ -167,27 +167,6 @@ function workspace() {
     musicWhiteSpace
   );
   document.getElementById("musicTextOut").innerHTML = combineMusicTextElements(slicedMusic);
-
-  document.getElementById("place").innerHTML = `${arrayToHtmlTable([
-    "music:",
-    ...music,
-  ])}${arrayToHtmlTable(["musicText", ...musicText])}${arrayToHtmlTable([
-    "isSpaceAfter:",
-    ...isSpaceAfter,
-  ])}${arrayToHtmlTable([
-    "musicWidth",
-    ...music.map((char) => Math.round(getGuidoCharWidth(char, "60px"))),
-  ])}${arrayToHtmlTable([
-    "textwidth",
-    ...musicText.map((char) => Math.round(getCharWidth(char, "30px"))),
-  ])}${arrayToHtmlTable(["whiteSpace:", ...musicWhiteSpace])}
-    ${document.getElementById("musOut").offsetWidth}`;
-  let computedWidth = getCharWidth(musicText.join(""), "30px", "Book Antiqua");
-  let roundedWidth = Math.round(computedWidth);
-  writeOutInPreDiv(
-    `${document.getElementById("musicTextOut").offsetWidth} | ${document.getElementById("musicTextOut").offsetWidth - roundedWidth
-    } | ${roundedWidth} (${computedWidth})`
-  );
 }
 
 workspace();

@@ -1,6 +1,6 @@
 
 function sliceUpInput() {
-    let origCode = document.getElementById("musIn").value;
+    let origCode = document.getElementById("musIn2").value;
     let music = "";
     let musicText = "";
     let isMusic;
@@ -28,7 +28,7 @@ function sliceUpInput() {
 
     }
 
-    document.getElementById("musOut").innerHTML = music;
+    document.getElementById("musOut2").innerHTML = music;
     document.getElementById("place").innerHTML = musicText;
 }
 
