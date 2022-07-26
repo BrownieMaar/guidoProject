@@ -1,4 +1,4 @@
-const barCharacters = [":", ";", ","];
+const barCharacters = ["'", '"', "+", "!", "%", "/", "=", ":", ";", ",", ".", "(", ")", "Ö", "Ü", "Ó"];
 
 function arrayToHtmlTable(myArray) {
   let myTable = "<table><tr>";
@@ -42,7 +42,7 @@ function combineMusicElements(music, whiteSpace) {
     combinedMusic.push(music[i]);
     combinedMusic.push(whiteSpace[i]);
   }
-  return combinedMusic.join("");
+  return combinedMusic.join("").replace("<", "&lt");
 }
 
 function computeTextElementWidths(musicObj) {
@@ -94,58 +94,100 @@ function combineMusicTextElements(musicObj) {
   return formattedTextString;
 }
 
-function sliceUpInput(codeMusic) {
+function musicCodeToMusicObject(codeMusic) {
   const music = [];
   const musicWhiteSpace = [];
   const musicText = [];
   const isSpaceAfter = [];
   let blockBuffer = "";
   let isMusicBeingInspected = false;
-  isEndingWithOpenedMusicBlock = false
+  let starterChar;
+  let closerChar;
 
   for (let char of codeMusic) {
-    if (char === "(") isEndingWithOpenedMusicBlock = true;
-    if (char === ")") isEndingWithOpenedMusicBlock = false;
+    if (char === "(" && !isMusicBeingInspected) {
+      starterChar = "("
+      closerChar = ")"
+      isMusicBeingInspected = true;
+    } 
+    
+    if (char === "{" && !isMusicBeingInspected) {
+      starterChar = "{"
+      closerChar = "}"
+      isMusicBeingInspected = true;
+    }
+    if (char === closerChar) {
+      isMusicBeingInspected = false;
+    }
+  }
+  if (isMusicBeingInspected) {
+    codeMusic += closerChar;
   }
 
-  if (isEndingWithOpenedMusicBlock) codeMusic += ")"
+  if (!isMusicBeingInspected && ![")", "}"].includes(codeMusic[codeMusic.length - 1])) {
+    codeMusic += "()";
+  }
 
-  if (codeMusic[codeMusic.length - 1] !== (")")) codeMusic += "()"
 
-  for (let x of codeMusic) {
-    if (x === "(") {
+  //re-initializing variables
+  isMusicBeingInspected = false;
+
+
+  for (let i = 0; i < codeMusic.length; i++) {
+
+    if (codeMusic[i] === "(" && !isMusicBeingInspected) {
+      starterChar = "("
+      closerChar = ")"
+    } 
+
+    if (codeMusic[i] === "{" && !isMusicBeingInspected) {
+      starterChar = "{"
+      closerChar = "}"
+    }
+
+    if (codeMusic[i] === starterChar) {
       musicText.push(blockBuffer);
       blockBuffer = "";
       isMusicBeingInspected = true;
       continue;
     }
 
-    if (x === ")") {
+    if (codeMusic[i] === closerChar) {
       music.push(blockBuffer);
       blockBuffer = "";
       isSpaceAfter.push(false);
-      musicWhiteSpace.push("---");
+      if (musicWhiteSpace.length !== music.length) {
+        musicWhiteSpace.push("---");
+      }
       isMusicBeingInspected = false;
       continue;
     }
 
-    if (x === " ") {
+    if (codeMusic[i] === " ") {
       isSpaceAfter.pop();
       isSpaceAfter.push(true);
       continue;
     }
 
-    if (barCharacters.includes(x) && isMusicBeingInspected) {
-      musicWhiteSpace[musicWhiteSpace.length - 1] = `-${x}--`;
+    if (barCharacters.includes(codeMusic[i]) && isMusicBeingInspected) {
+      if (codeMusic[i - 1] === starterChar) musicWhiteSpace[musicWhiteSpace.length - 1] = `-${codeMusic[i]}--`;
+      else if (codeMusic[i + 1] === closerChar) musicWhiteSpace[musicWhiteSpace.length] = `-${codeMusic[i]}--`;
       continue;
     }
 
-    blockBuffer += x;
+    blockBuffer += codeMusic[i];
   }
 
-  //isSpaceAfter.pop();
+  if (![")", "}"].includes(codeMusic[codeMusic.length-1]) && isMusicBeingInspected) music.push(blockBuffer);
+  if (![")", "}"].includes(codeMusic[codeMusic.length-1]) && !isMusicBeingInspected) musicText.push(blockBuffer);
+  
+  music[0] += "-"
   musicWhiteSpace[0] = "";
-  musicWhiteSpace[musicWhiteSpace.length - 1] = "";
+  if (barCharacters.includes(musicWhiteSpace[musicWhiteSpace.length - 1][1])) {
+    musicWhiteSpace[musicWhiteSpace.length - 1] = musicWhiteSpace[musicWhiteSpace.length - 1].slice(0,2)
+  } else {
+    musicWhiteSpace[musicWhiteSpace.length - 1] = ""
+  }
 
   return {
     music: music,
@@ -156,11 +198,12 @@ function sliceUpInput(codeMusic) {
 }
 
 function workspace() {
-  const slicedMusic = sliceUpInput(document.getElementById("musIn").value);
+  const slicedMusic = musicCodeToMusicObject(document.getElementById("musIn").value);
   const music = slicedMusic.music;
   const musicText = slicedMusic.musicText;
   const isSpaceAfter = slicedMusic.isSpaceAfter;
   const musicWhiteSpace = slicedMusic.musicWhiteSpace;
+  console.table(slicedMusic);
 
   document.getElementById("musOut").innerHTML = combineMusicElements(
     music,

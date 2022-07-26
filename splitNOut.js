@@ -1,5 +1,5 @@
 
-function sliceUpInput() {
+function musicCodeToMusicObject() {
     let origCode = document.getElementById("musIn2").value;
     let music = "";
     let musicText = "";
@@ -32,4 +32,4 @@ function sliceUpInput() {
     document.getElementById("place").innerHTML = musicText;
 }
 
-sliceUpInput();
+musicCodeToMusicObject();

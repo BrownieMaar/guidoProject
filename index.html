@@ -15,54 +15,31 @@
 </head>
 
 <body>
-    <h1>Ez egy projekt.</h1>
+    <h1>Guido projekt</h1>
     <h2>A projekt célja, hogy guido betűtípussal készült kottákat lehessen webes alapú környezetben használni.</h2>
-    <h3>1. iteráció</h3>
     <p>
-        Az alábbi példában a kottán az <mark>overflow</mark> stílustulajdonságot
-        <mark>hidden</mark>-re állítottuk, a <mark>text-overflow</mark> stílustulajdonságot
-        pedig <mark>clip</mark>-re. A kottaszöveget <mark>pre</mark> tagbe írtuk, mely célja,
-        hogy előformázott szöveget írjon a képernyőre. (Így a többszörös szóközöket nem vonja össze.)
-        Az <mark>overflow</mark> itt is <mark>hidden</mark>,
-        de a <mark>text-overflow ellipsis</mark> tulajdonságot kapott, így a levágott szöveg végén
-        <mark>...</mark> jelenik meg.
+        Használati útmutató:<br>
+        Zárójelek közé írjuk azokat a karaktereket, amiket kottaként akarunk megjeleníteni, a zárójeleken kívülre
+        pedig amiket szövegként. Szótagonként írjuk a kotta adatait a szöveg után. A szóközöket a kotta-blokk után helyezzük el.
+        Ha zárjel karaktereket szeretnénk a kottában használni, a kottablokkot határolhatjuk zárójelek helyett kapcsos zárójellel.
     </p>
-    <div>
-        <p class="music">MX-5z---tT4---tGW1-:--34t-zZ5T4-eE2W1---0---1---1-,,</p>
-    </div>
-    <pre class="musictext">         <em>K</em>ý -  ri  -   e          e           -         lé  -  i - son.</pre>
-    <p>
-        <u>Eredmény:</u> Ha a kotta nem fér a képernyőre, nem töri szét a kottasort
-        a böngésző, ezzel a teljes kottaformázást és olvashatóságot a kukába dobva.
-        A kotta képernyőről lemaradt részének létét a kottaszöveg <u>...</u>-al jelzi.
-        A kottaszöveg a kotta alá rendezve marad, nem olvadnak össze a szóközök.
-    </p>
-    <h3>2. iteráció</h3>
-
-    <p>
-        Az alábbi példában látszik, hogy a bemeneti érték, ami élőben aktualizálja az
-        alatta szereplő kottát, egyszerre tartalmazza a kotta és a szöveg értékét. A
-        zárójelek között szereplő értékek a kotta adatai, a zárójeleken kívüli értékek a
-        szöveg adatai.
-    </p>
-    <input id="musIn2"
-        value="(M-)        Tu(1e) -  a(---3)    est(-:--3)   pot(---2e) - én(---4) -  ti(---1w)  -  a.(---2-.)"
-        style="width: 100%;" oninput="sliceUpInput()">
-    <p id="musOut2" class="music"></p>
-    <pre id="place" class="musictext"></pre>
-
-    <script src="./splitNOut.js"></script>
-
-    <h3>3. iteráció</h3>
-    <p>Sikerült a bemeneti kódot darabjaira szedni s egy objektumba elhelyyezni az adatokat. Ezután az objektumot
-        feldolgozni, kiírni
-        a kottát whitespace-el megfűszerezve, a szöveget pedig kiszámolt szélességű <code>span</code> elemekkel
-        pontosan a hangcsoportok alá rendezni.
-    </p>
-    <input id="musIn" value="(M-)Tu(1e)a(3) est(:3) pot(2e)én(4)ti(1w)a.(2-.)" style="width: 100%;"
+    
+    <input id="musIn" value="(<X)Ký(5z)ri(tT4)e(tGW1:) e(34t-zZ5T4-eE2W1)lé(0)i(1)son.(1,,)" style="width: 100%;"
         oninput="callThis()">
-    <p id="musOut" class="music"></p>
-    <pre id="musicTextOut" class="musictext"></pre>
+    <div class="music-container">
+        <p id="musOut" class="music"></p>
+        <p id="musicTextOut" class="musictext"></p>
+    </div>
+
+    <p>
+        Tennivalók:<br>
+        <ul>
+            <li>A tagoló jelek pontosabb értelmezése: dupla ütemvonalak, stb.</li>
+            <li>Automatikus sortörés túlcsordulás esetén</li>
+            <li>Tabulátor-karakteres renderelés, Word-kompatibilitás érdekében</li>
+            <li>Állítható betűméret, betűtípus</li>
+        </ul>
+    </p>
 
 </body>
 

@@ -32,7 +32,7 @@
 body {
     width: 1200px;
     margin: auto;
-    background-color: lightcoral;
+    background-color: Cornsilk;
     color: black;
 }
 
@@ -90,11 +90,17 @@ mark {
     margin-top: 0px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: pre;
+    font-style: normal;
 }
 
 .musictext span {
     display: inline-block;
     text-align: center;
+}
+
+li {
+    font-family: 'Work Sans';
 }
 
 em {
@@ -112,7 +118,7 @@ table, th, td {
     border-collapse: collapse;
   }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1440px) {
     body {
         width: 80%
     }
