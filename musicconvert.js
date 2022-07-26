@@ -212,9 +212,8 @@ function workspace() {
   document.getElementById("musicTextOut").innerHTML = combineMusicTextElements(slicedMusic);
 }
 function callThis() {
-  window.onload = (event) => workspace();
-
+  workspace;
 }
 
 
-callThis();
+window.onload = (event) => workspace();
