@@ -48,7 +48,7 @@ function combineMusicElements(music, whiteSpace) {
 function computeTextElementWidths(musicObj) {
   const computedTextElementWidth = {
     textWidth: [0],
-    whiteSpaceWidth: [getGuidoCharWidth(musicObj.music[0], "60px")],
+    whiteSpaceWidth: [getGuidoCharWidth(musicObj.music[0], "60px")], //initial value is the length of the staff
   };
 
   for (let i = 1; i < musicObj.musicText.length; i++) {
@@ -57,6 +57,19 @@ function computeTextElementWidths(musicObj) {
     let musicTextLength = getCharWidth(musicObj.musicText[i], "30px", "Book Antiqua");
 
     if (musicTextLength > musicLength) {
+      if (computedTextElementWidth.whiteSpaceWidth[i - 1] - (musicTextLength - musicLength) / 2 - getCharWidth("-", "30px", "Book Antiqua") < 0) {
+        if (computedTextElementWidth.whiteSpaceWidth[i - 1] - (musicTextLength - musicLength) / 2 > 0) {
+          let spaceToFill = getGuidoCharWidth("-", "60px") - (computedTextElementWidth.whiteSpaceWidth[i - 1] - (musicTextLength - musicLength) / 2);
+          console.log(spaceToFill)
+          console.log(getGuidoCharWidth("¨", "60px"))
+          musicObj.musicWhiteSpace[i-1] += "¨".repeat(Math.round(spaceToFill / getGuidoCharWidth("¨", "60px")))
+        }
+        console.log(computedTextElementWidth.whiteSpaceWidth[i - 1] - (musicTextLength - musicLength) / 2)
+        console.log(getGuidoCharWidth("-", "30px", "Book Antiqua"))
+      }
+      musicWhiteSpaceLength = getGuidoCharWidth(musicObj.musicWhiteSpace[i], "60px");
+
+
       computedTextElementWidth.whiteSpaceWidth[i - 1] -=
         (musicTextLength - musicLength) / 2;
       computedTextElementWidth.textWidth[i] = musicTextLength;
@@ -83,10 +96,10 @@ function combineMusicTextElements(musicObj) {
 
   for (let i = 0; i < musicObj.musicText.length; i++) {
     if (computedTextElementWidth.textWidth[i] !== 0) {
-      formattedTextString += `<span style="width: ${Math.round(computedTextElementWidth.textWidth[i])}px">${musicObj.musicText[i]}</span>`
+      formattedTextString += `<span style="width: ${computedTextElementWidth.textWidth[i]}px">${musicObj.musicText[i]}</span>`
     }
 
-    formattedTextString += `<span style="width: ${Math.round(computedTextElementWidth.whiteSpaceWidth[i])}px">${(musicObj.isSpaceAfter[i] || [0, musicObj.musicText.length - 1].includes(i)) ? "" : "-"}</span>`
+    formattedTextString += `<span style="width: ${computedTextElementWidth.whiteSpaceWidth[i]}px">${(musicObj.isSpaceAfter[i] || [0, musicObj.musicText.length - 1].includes(i)) ? "" : "-"}</span>`
 
   }
 
@@ -205,11 +218,11 @@ function workspace() {
   const musicWhiteSpace = slicedMusic.musicWhiteSpace;
   console.table(slicedMusic);
 
+  document.getElementById("musicTextOut").innerHTML = combineMusicTextElements(slicedMusic);
   document.getElementById("musOut").innerHTML = combineMusicElements(
     music,
     musicWhiteSpace
   );
-  document.getElementById("musicTextOut").innerHTML = combineMusicTextElements(slicedMusic);
 }
 function callThis() {
   workspace();
